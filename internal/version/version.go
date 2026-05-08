@@ -21,8 +21,10 @@ func (v Version) Identifier() string {
 	return fmt.Sprintf("%s/%s", v.Name, v.Version)
 }
 
+var appVersion = "dev"
+
 // App defines The application version.
 var App = Version{
 	Name:    "h2static",
-	Version: "2.4.8",
+	Version: appVersion,
 }
