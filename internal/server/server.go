@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/albertodonato/h2static/version"
+	"github.com/albertodonato/h2static/internal/version"
 )
 
 // StaticServerConfig holds configuration options for a StaticServer.

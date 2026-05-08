@@ -1,4 +1,4 @@
-package main_test
+package main
 
 import (
 	"flag"
@@ -7,8 +7,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/albertodonato/h2static/cmd/h2static"
-	"github.com/albertodonato/h2static/testhelpers"
+	"github.com/albertodonato/h2static/internal/testhelpers"
 )
 
 // A writer that collects the content
@@ -52,7 +51,7 @@ func (s *H2StaticTestSuite) TestNewStaticServerFromCmdline() {
 	keyPath := s.WriteFile("key.pem", "key")
 	dirPath := s.Mkdir("dir")
 
-	server, err := main.NewStaticServerFromCmdline(
+	server, err := NewStaticServerFromCmdline(
 		s.flagSet,
 		[]string{
 			"-addr", ":9090", "-allow-outside-symlinks", "-basic-auth", passwdPath,
@@ -74,7 +73,7 @@ func (s *H2StaticTestSuite) TestNewStaticServerFromCmdline() {
 // Config options are validated and error returned on invalid paths.
 func (s *H2StaticTestSuite) TestValidateConfig() {
 	fileName := filepath.Join("not", "here")
-	server, err := main.NewStaticServerFromCmdline(
+	server, err := NewStaticServerFromCmdline(
 		s.flagSet, []string{"-dir", fileName})
 	s.Nil(server)
 	s.NotNil(err)
@@ -83,7 +82,7 @@ func (s *H2StaticTestSuite) TestValidateConfig() {
 
 // newStaticServerFromCmdline prints help text.
 func (s *H2StaticTestSuite) TestParseFlagsHelp() {
-	_, err := main.NewStaticServerFromCmdline(s.flagSet, []string{"-h"})
+	_, err := NewStaticServerFromCmdline(s.flagSet, []string{"-h"})
 	s.Equal(flag.ErrHelp, err)
 	s.Contains(
 		s.writer.Output(), "Tiny static web server with TLS and HTTP/2 support.")

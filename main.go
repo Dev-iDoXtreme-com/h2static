@@ -6,8 +6,8 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/albertodonato/h2static/server"
-	"github.com/albertodonato/h2static/version"
+	"github.com/albertodonato/h2static/internal/server"
+	"github.com/albertodonato/h2static/internal/version"
 )
 
 const helpHeaderTemplate = `

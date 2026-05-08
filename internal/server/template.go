@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/albertodonato/h2static/version"
+	"github.com/albertodonato/h2static/internal/version"
 )
 
 // AssetsPrefix defines the URL prefix for static assets.

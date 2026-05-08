@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/albertodonato/h2static/version"
+	"github.com/albertodonato/h2static/internal/version"
 )
 
 func TestVersion(t *testing.T) {

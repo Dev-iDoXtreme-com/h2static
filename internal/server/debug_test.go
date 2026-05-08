@@ -8,8 +8,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/albertodonato/h2static/server"
-	"github.com/albertodonato/h2static/testhelpers"
+	"github.com/albertodonato/h2static/internal/server"
+	"github.com/albertodonato/h2static/internal/testhelpers"
 )
 
 func TestServeDebug(t *testing.T) {

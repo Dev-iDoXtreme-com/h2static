@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/albertodonato/h2static/server"
+	"github.com/albertodonato/h2static/internal/server"
 )
 
 // Special files are not included in listing.
