@@ -71,7 +71,7 @@ issues: https://github.com/albertodonato/h2static/issues
 icon: server/assets/logo.svg
 confinement: strict
 grade: stable
-base: core22
+base: core26
 
 apps:
   h2static:
@@ -95,7 +95,7 @@ parts:
     source-type: git
     build-snaps:
       - go
-    # Manually strip binaries (see https://pad.lv/1858785)
+      # Manually strip binaries (see https://pad.lv/1858785)
     override-build: |
       craftctl default
       strip -s $CRAFT_PART_INSTALL/bin/h2static
