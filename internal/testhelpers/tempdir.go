@@ -24,7 +24,7 @@ func (s *TempDirTestSuite) SetupTest() {
 
 // TearDownTest cleans up the temporary dir.
 func (s *TempDirTestSuite) TearDownTest() {
-	os.RemoveAll(s.TempDir)
+	s.NoError(os.RemoveAll(s.TempDir))
 }
 
 // WriteFile creates a file with the specified content, returning the absolute

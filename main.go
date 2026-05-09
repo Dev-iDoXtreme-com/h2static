@@ -48,13 +48,17 @@ func NewStaticServerFromCmdline(fs *flag.FlagSet, args []string) (*server.Static
 	fs.Usage = func() {
 		printHeader(fs)
 		fs.PrintDefaults()
-		fmt.Fprintln(fs.Output())
+		if _, err := fmt.Fprintln(fs.Output()); err != nil {
+			log.Fatal(err)
+		}
 	}
 	if err := fs.Parse(args); err != nil {
 		return nil, err
 	}
 	if versionFlag {
-		fmt.Fprintln(fs.Output(), version.App.String())
+		if _, err := fmt.Fprintln(fs.Output(), version.App.String()); err != nil {
+			log.Fatal(err)
+		}
 		os.Exit(0)
 	}
 	return server.NewStaticServer(conf)

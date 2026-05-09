@@ -32,7 +32,7 @@ func (fs FileSystem) Open(name string) (*File, error) {
 	}
 
 	_, err := fs.open(name)
-	if os.IsNotExist(err) && fs.ResolveHTML && !(strings.HasSuffix(name, ".html") || strings.HasSuffix(name, ".htm")) {
+	if os.IsNotExist(err) && fs.ResolveHTML && !strings.HasSuffix(name, ".html") && !strings.HasSuffix(name, ".htm") {
 		for _, suffix := range []string{".html", ".htm"} {
 			newName := name + suffix
 			if file, err := fs.OpenFile(newName); err == nil {
@@ -149,7 +149,7 @@ func (f File) Readdir() ([]*File, error) {
 			continue
 		}
 		mode := info.Mode()
-		if !(mode.IsDir() || mode.IsRegular()) {
+		if !mode.IsDir() && !mode.IsRegular() {
 			continue
 		}
 		file, err := f.newFile(name)
