@@ -72,6 +72,9 @@ icon: server/assets/logo.svg
 confinement: strict
 grade: stable
 base: core26
+platforms:
+  amd64:
+  arm64:
 
 apps:
   h2static:
