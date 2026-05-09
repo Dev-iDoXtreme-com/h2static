@@ -2,8 +2,8 @@ package testhelpers
 
 import (
 	"os"
-	"time"
 	"path/filepath"
+	"time"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -28,11 +28,11 @@ func (s *TempDirTestSuite) TearDownTest() {
 	if s.TempDir == "" {
 		return
 	}
-	
+
 	// Retry removal with a small delay to handle Windows file locking issues
 	var err error
 	for attempt := 0; attempt < 3; attempt++ {
-		if err = os.RemoveAll(s.TempDir);  err == nil {
+		if err = os.RemoveAll(s.TempDir); err == nil {
 			return
 		}
 		time.Sleep(100 * time.Millisecond)
