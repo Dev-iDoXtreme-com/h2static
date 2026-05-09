@@ -101,7 +101,7 @@ parts:
     override-build: |
       go build \
         -ldflags="-s -w -X github.com/albertodonato/h2static/internal/version.appVersion=$SNAPCRAFT_PROJECT_VERSION" \
-        -o "$SNAPCRAFT_PART_INSTALL/bin/h2static" ./...
+        -o "$SNAPCRAFT_PART_INSTALL/bin/h2static"
 
   daemon-wrapper:
     plugin: dump
