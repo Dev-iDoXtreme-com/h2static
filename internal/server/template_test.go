@@ -41,7 +41,7 @@ func (s *DirectoryListingTemplateTestSuite) SetupTest() {
 func (s *DirectoryListingTemplateTestSuite) TestRenderHTML() {
 	template := server.NewDirectoryListingTemplate(server.DirectoryListingTemplateConfig{})
 	w := httptest.NewRecorder()
-	template.RenderHTML(w, "/", s.dir, "", true)
+	s.Require().NoError(template.RenderHTML(w, "/", s.dir, "", true))
 	response := w.Result()
 	s.Equal(http.StatusOK, response.StatusCode)
 	s.Equal("text/html; charset=utf-8", response.Header.Get("Content-Type"))
@@ -55,7 +55,7 @@ func (s *DirectoryListingTemplateTestSuite) TestRenderHTML() {
 func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLWithPathPrefix() {
 	template := server.NewDirectoryListingTemplate(server.DirectoryListingTemplateConfig{PathPrefix: "/prefix"})
 	w := httptest.NewRecorder()
-	template.RenderHTML(w, "/", s.dir, "", true)
+	s.Require().NoError(template.RenderHTML(w, "/", s.dir, "", true))
 	content := w.Body.String()
 	s.Contains(content, `<link rel="shortcut icon" type="image/svg+xml" href="/prefix/.h2static-assets/logo.svg">`)
 	s.Contains(content, `<link rel="stylesheet" type="text/css" href="/prefix/.h2static-assets/style.css">`)
@@ -65,7 +65,7 @@ func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLWithPathPrefix() {
 func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLSortControlsDesc() {
 	template := server.NewDirectoryListingTemplate(server.DirectoryListingTemplateConfig{})
 	w := httptest.NewRecorder()
-	template.RenderHTML(w, "/", s.dir, "", true)
+	s.Require().NoError(template.RenderHTML(w, "/", s.dir, "", true))
 	response := w.Result()
 	s.Equal(http.StatusOK, response.StatusCode)
 	s.Equal("text/html; charset=utf-8", response.Header.Get("Content-Type"))
@@ -78,7 +78,7 @@ func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLSortControlsDesc() {
 func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLSortControlsAsc() {
 	template := server.NewDirectoryListingTemplate(server.DirectoryListingTemplateConfig{})
 	w := httptest.NewRecorder()
-	template.RenderHTML(w, "/", s.dir, "", false)
+	s.Require().NoError(template.RenderHTML(w, "/", s.dir, "", false))
 	response := w.Result()
 	s.Equal(http.StatusOK, response.StatusCode)
 	s.Equal("text/html; charset=utf-8", response.Header.Get("Content-Type"))
@@ -91,13 +91,13 @@ func (s *DirectoryListingTemplateTestSuite) TestRenderHTMLSortControlsAsc() {
 func (s *DirectoryListingTemplateTestSuite) TestRenderJSON() {
 	template := server.NewDirectoryListingTemplate(server.DirectoryListingTemplateConfig{})
 	w := httptest.NewRecorder()
-	template.RenderJSON(w, "/", s.dir, "", true)
+	s.Require().NoError(template.RenderJSON(w, "/", s.dir, "", true))
 	response := w.Result()
 	s.Equal(http.StatusOK, response.StatusCode)
 	s.Equal("application/json", response.Header.Get("Content-Type"))
 	decoder := json.NewDecoder(w.Body)
 	var content server.DirInfo
-	decoder.Decode(&content)
+	s.Require().NoError(decoder.Decode(&content))
 	s.Equal(
 		server.DirInfo{
 			Name:   "/",

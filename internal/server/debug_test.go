@@ -31,7 +31,7 @@ func (s *ServeDebugTestSuite) TestDebugVarURL() {
 	response := w.Result()
 	s.Equal(http.StatusOK, response.StatusCode)
 	var payload map[string]any
-	json.Unmarshal(w.Body.Bytes(), &payload)
+	s.Require().NoError(json.Unmarshal(w.Body.Bytes(), &payload))
 	_, ok := payload["cmdline"]
 	s.True(ok)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"text/template"
@@ -47,13 +48,13 @@ func NewStaticServerFromCmdline(fs *flag.FlagSet, args []string) (*server.Static
 	fs.Usage = func() {
 		printHeader(fs)
 		fs.PrintDefaults()
-		fs.Output().Write([]byte{'\n'})
+		fmt.Fprintln(fs.Output())
 	}
 	if err := fs.Parse(args); err != nil {
 		return nil, err
 	}
 	if versionFlag {
-		fs.Output().Write([]byte(version.App.String() + "\n"))
+		fmt.Fprintln(fs.Output(), version.App.String())
 		os.Exit(0)
 	}
 	return server.NewStaticServer(conf)

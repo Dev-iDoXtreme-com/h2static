@@ -181,7 +181,7 @@ func (s *FileHandlerTestSuite) TestListingJSON() {
 	s.Equal("application/json", response.Header.Get("Content-Type"))
 	decoder := json.NewDecoder(w.Body)
 	var content server.DirInfo
-	decoder.Decode(&content)
+	s.Require().NoError(decoder.Decode(&content))
 }
 
 // JSON listing can be sorted in descending order.
@@ -196,7 +196,7 @@ func (s *FileHandlerTestSuite) TestListingJSONSortDesc() {
 	s.Equal("application/json", response.Header.Get("Content-Type"))
 	decoder := json.NewDecoder(w.Body)
 	var content server.DirInfo
-	decoder.Decode(&content)
+	s.Require().NoError(decoder.Decode(&content))
 	s.Equal(
 		server.DirInfo{
 			Name:   "/",
@@ -230,7 +230,7 @@ func (s *FileHandlerTestSuite) TestListingJSONSortSize() {
 	s.Equal("application/json", response.Header.Get("Content-Type"))
 	decoder := json.NewDecoder(w.Body)
 	var content server.DirInfo
-	decoder.Decode(&content)
+	s.Require().NoError(decoder.Decode(&content))
 	s.Equal(
 		server.DirInfo{
 			Name:   "/",
